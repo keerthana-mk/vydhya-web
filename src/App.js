@@ -17,6 +17,7 @@ import { useAuth } from "./services/auth";
 import api from "./services/api";
 import WithAdmin from "./hocs/WithAdmin";
 import Main from "./components/pages/home/Main";
+import UserRegistration from "./components/pages/auth/UserRegistration";
 
 const App = () => {
   const { token } = useAuth();
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="login" element={<Login />} />
         <Route path="admin" element={<WithAdmin />}>
           <Route path="home" element={<Main />} />
+          <Route path="register" element={<UserRegistration />}/>
         </Route>
         <Route path="*" element={<Lost />} />
       </Routes>
