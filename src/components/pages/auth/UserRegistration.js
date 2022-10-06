@@ -37,8 +37,7 @@ const UserRegistration = () => {
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
         d={{ sm: "none", lg: "flex" }}
-        backgroundSize="cover"
-      ></Flex>
+        backgroundSize="cover"></Flex>
       <Flex w={{ base: "100%", lg: "50%" }} direction="column" align="center" justify="center">
         <Text fontSize="2xl" fontWeight="600" textAlign="left">
           User Registration

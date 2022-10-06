@@ -29,9 +29,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="login" element={<Login />} />
+        <Route path="register" element={<UserRegistration />}/>
         <Route path="admin" element={<WithAdmin />}>
           <Route path="home" element={<Main />} />
-          <Route path="register" element={<UserRegistration />}/>
         </Route>
         <Route path="*" element={<Lost />} />
       </Routes>
