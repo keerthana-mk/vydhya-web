@@ -33,12 +33,14 @@ const Login = () => {
   ) : (
     <Flex bg="white" pos="fixed" top="0" left="0" right="0" bottom="0" zIndex={2}>
       <Flex
-        w={"50%"}
-        // backgroundImage={`url(${require("../../../assets/home.png")})`}
+        w={"70%"}
+        // eslint-disable-next-line no-undef
+        backgroundImage={`url(${require("../../../assets/home.png")})`}
         backgroundPosition="center"
         backgroundRepeat="no-repeat"
         d={{ sm: "none", lg: "flex" }}
         backgroundSize="cover"
+        p="10"
       ></Flex>
       <Flex w={{ base: "100%", lg: "50%" }} direction="column" align="center" justify="center">
         <Text fontSize="2xl" fontWeight="600" textAlign="left">
@@ -57,6 +59,9 @@ const Login = () => {
                   </Button>
                   <Link to="/reset-credentials">
                     <Text fontSize="sm">Reset Credentials?</Text>
+                  </Link>
+                  <Link to="/register">
+                    <Text fontSize="sm">New User?</Text>
                   </Link>
                 </Stack>
               </Form>
