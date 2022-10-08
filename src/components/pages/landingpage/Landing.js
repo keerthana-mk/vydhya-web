@@ -13,6 +13,5 @@ const Landing = () => {
         </Box>
        </Flex> 
     );
-
 };
 export default Landing;
