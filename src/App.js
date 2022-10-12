@@ -17,6 +17,7 @@ import { useAuth } from "./services/auth";
 import api from "./services/api";
 import WithAdmin from "./hocs/WithAdmin";
 import Main from "./components/pages/home/Main";
+import  Landing  from "./components/pages/landingpage/Landing";
 import UserRegistration from "./components/pages/auth/UserRegistration";
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
       <ResponseInterceptor />
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="landing" element={<Landing />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<UserRegistration />}/>
         <Route path="admin" element={<WithAdmin />}>
