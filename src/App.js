@@ -9,7 +9,7 @@ import customTheme from "./styles/theme";
 
 //Other Imports
 import { ChakraProvider } from "@chakra-ui/react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Login } from "./components/pages/auth";
 import { Lost } from "./components/pages";
 import { ResponseInterceptor } from "./components/utils/ResponseInterceptor";
@@ -17,7 +17,7 @@ import { useAuth } from "./services/auth";
 import api from "./services/api";
 import WithAdmin from "./hocs/WithAdmin";
 import Main from "./components/pages/home/Main";
-import  Landing  from "./components/pages/landingpage/Landing";
+import Landing from "./components/pages/landingpage/Landing";
 import UserRegistration from "./components/pages/auth/UserRegistration";
 
 const App = () => {
@@ -28,10 +28,9 @@ const App = () => {
     <ChakraProvider resetCSS theme={customTheme}>
       <ResponseInterceptor />
       <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="landing" element={<Landing />} />
+        <Route path="/" element={<Landing />} />
         <Route path="login" element={<Login />} />
-        <Route path="register" element={<UserRegistration />}/>
+        <Route path="register" element={<UserRegistration />} />
         <Route path="admin" element={<WithAdmin />}>
           <Route path="home" element={<Main />} />
         </Route>
