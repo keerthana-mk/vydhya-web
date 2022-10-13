@@ -20,7 +20,7 @@ export const useLogout = () => {
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("auth");
-    navigate("/login");
+    navigate("/");
   };
   return logout;
 };
