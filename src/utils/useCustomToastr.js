@@ -1,7 +1,7 @@
 import { useToast } from "@chakra-ui/react";
 
 const DEFAULT_TOAST_OPTIONS = {
-  duration: 4000,
+  duration: 3000,
   position: "bottom",
   isClosable: true,
   variant: "custom",
@@ -34,7 +34,7 @@ const useCustomToastr = () => {
       description: description,
       position: "bottom",
       status: "error",
-      duration: 4000,
+      duration: 3000,
       isClosable: true,
     });
   };
@@ -45,7 +45,7 @@ const useCustomToastr = () => {
       description: "Internet error! Check your connection.",
       position: "bottom",
       status: "error",
-      duration: 4000,
+      duration: 3000,
       isClosable: true,
     });
   };
@@ -56,7 +56,7 @@ const useCustomToastr = () => {
       description: "Something went wrong.",
       position: "bottom",
       status: "error",
-      duration: 4000,
+      duration: 3000,
       isClosable: true,
     });
   };

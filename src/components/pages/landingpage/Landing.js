@@ -13,7 +13,7 @@ const Landing = () => {
     <Flex>
       <Box>
         <Flex h="10vh" alignItems="center" p="6" position="sticky" top="0" zIndex="sticky" w="full">
-          <Link to="/register">
+          <Link to="/">
             <Text fontSize="xl" fontWeight="bold" cursor="pointer">
               YDHYA
             </Text>
@@ -39,7 +39,7 @@ const Landing = () => {
               YDHYA - Building a bridge between your well-being and you.
             </Text>
             <Text mb="6" fontSize={isLargerThanLG ? "lg" : "base"} opacity={0.7}>
-              To provide everyone, everywhere with accessible healthcare and affordable incurance.
+              To provide everyone, everywhere with accessible healthcare and affordable insurance.
             </Text>
             <Link to="/register">
               <Button

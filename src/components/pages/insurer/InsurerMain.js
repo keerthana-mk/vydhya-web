@@ -3,13 +3,14 @@ import React from "react";
 import { useAuth } from "../../../services/auth";
 import Layout from "../../common/Layout";
 
-const Main = () => {
+const InsurerMain = () => {
   const { user } = useAuth();
   return (
     <Layout>
       <Stack>
         <Heading>{`Welcome ${user.name}`}</Heading>
         <Container py={5} maxW={"container.lg"}>
+          <Heading as={"h4"}>Upcoming Claims</Heading>
           <Grid
             templateColumns={{
               base: "repeat(1, 1fr)",
@@ -17,23 +18,23 @@ const Main = () => {
               md: "repeat(4, 1fr)",
             }}
             gap={6}
+            mt={5}
           >
-            <GridItem w="100%" colSpan={{ base: 1, sm: 2, md: 2 }}>
-              <Heading as={"h4"}>Upcoming Appointments</Heading>
-            </GridItem>
             <GridItem w="100%">
-              <Flex flexDirection={"column"}>
+              <Flex flexDirection={"column"} background="white" p="10" borderRadius={10}>
                 <Text fontSize={"4xl"} fontWeight={"bold"}>
-                  Appointment 1
+                  Claim 1
                 </Text>
+                <Box fontSize={"sm"}>$1000</Box>
                 <Box fontSize={"sm"}>Address and time</Box>
               </Flex>
             </GridItem>
             <GridItem w="100%">
-              <Flex flexDirection={"column"}>
+            <Flex flexDirection={"column"} background="white" p="10" borderRadius={10}>
                 <Text fontSize={"4xl"} fontWeight={"bold"}>
-                  Appointment 2
+                  Claim 2
                 </Text>
+                <Box fontSize={"sm"}>$1000</Box>
                 <Box fontSize={"sm"}>Address and time</Box>
               </Flex>
             </GridItem>
@@ -44,4 +45,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default InsurerMain;

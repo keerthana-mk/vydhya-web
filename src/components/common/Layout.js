@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
   const { user } = useAuth();
 
   return (
-    <Flex flexDirection={["column", "column", "row", "row"]} w="100vw" h="100vh">
+    <Flex flexDirection={["column", "column", "row", "row"]} w="100%" minH="100vh">
       <Box bg="primary" display={["none", "none", "block", "block"]} w={"10%"} pl={[0, 0, 0, 1]} pr={2}>
         <Sidebar />
       </Box>

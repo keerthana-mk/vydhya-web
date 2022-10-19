@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Divider, Flex } from "@chakra-ui/react";
 import adminMenu from "../../constants/adminMenu";
+import insurerMenu from "../../constants/insurerMenu";
 import { Link } from "react-router-dom";
 import { useAuth, useLogout } from "../../services/auth";
 import { BiLogOut } from "react-icons/bi";
@@ -8,9 +9,11 @@ import { BiLogOut } from "react-icons/bi";
 function Sidebar() {
   const logout = useLogout();
   const { user } = useAuth();
+  console.log("🚀 -> file: Sidebar.js -> line 12 -> user", user)
 
   const menuSelector = {
-    admin: adminMenu,
+    customer: adminMenu,
+    insurer: insurerMenu,
   };
 
   const menu = menuSelector[user?.role];
