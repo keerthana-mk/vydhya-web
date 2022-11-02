@@ -30,7 +30,6 @@ const UserRegistration = () => {
   };
 
   const onSubmit = (values, { setSubmitting }) => {
-    console.log("🚀 -> file: UserRegistration.js -> line 43 -> values", values);
     setSubmitting(true);
     // localStorage.setItem("auth", JSON.stringify({ user: { name: "Janmejay", role: "admin", id: 1 }, token: "12345" }));
     // navigate(`/login`);

@@ -15,7 +15,7 @@
   "plugins": ["react"],
   "rules": {
     "no-console": "warn",
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
     "func-names": "off",
     "no-underscore-dangle": "off",
     "consistent-return": "off",
