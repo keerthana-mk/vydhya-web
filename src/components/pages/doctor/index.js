@@ -1,0 +1,1 @@
+export { default as ViewDoctors } from "./ViewDoctors";
