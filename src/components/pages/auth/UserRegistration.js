@@ -5,10 +5,15 @@ import { InputField, PasswordField, SelectField } from "../../formik";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Box, Flex, Text, Button, Stack } from "@chakra-ui/react";
+import api from "../../../services/api";
+import { REGISTER } from "../../../constants/apiRoutes";
+import { formattedErrorMessage } from "../../../utils/formattedErrorMessage";
+import useCustomToastr from "../../../utils/useCustomToastr";
 
 const UserRegistration = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const toast = useCustomToastr();
 
   const registrationFormSchema = Yup.object().shape({
     user_id: Yup.string().min(2, "Too Short!").required("Required"),
@@ -31,8 +36,17 @@ const UserRegistration = () => {
 
   const onSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
-    // localStorage.setItem("auth", JSON.stringify({ user: { name: "Janmejay", role: "admin", id: 1 }, token: "12345" }));
-    // navigate(`/login`);
+    api
+      .post(REGISTER, values)
+      .then((response) => {
+        toast.showSuccess("Registration Successful!");
+        navigate("/login");
+      })
+      .catch((error) => {
+        const e = formattedErrorMessage(error);
+        toast.showError(e);
+        setSubmitting(false);
+      });
     setSubmitting(false);
   };
 

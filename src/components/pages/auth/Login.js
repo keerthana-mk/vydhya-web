@@ -28,25 +28,18 @@ const Login = () => {
 
   const onSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
-    if (!LOGIN_STUB[values.user_id]) {
-      setSubmitting(false);
-      return toast.showError({ description: "Invalid credentials" });
-    }
-    const { role, username, token } = LOGIN_STUB[values.user_id];
-    // api
-    //   .post(LOGIN, values)
-    //   .then((response) => {
-    //     const { token, userId, username, role } = response.data;
-    //     localStorage.setItem("auth", JSON.stringify({ user: { userId, role, username }, token }));
-    //     navigate(`/${role}/home`);
-    //   })
-    //   .catch((error) => {
-    //     const e = formattedErrorMessage(error);
-    //     toast.showError(e);
-    //     setSubmitting(false);
-    //   });
-    localStorage.setItem("auth", JSON.stringify({ user: { username, role }, token }));
-    navigate(`/${role}/home`);
+    api
+      .post(LOGIN, values)
+      .then((response) => {
+        const { token, userId, username, role } = response.data;
+        localStorage.setItem("auth", JSON.stringify({ user: { userId, role, username }, token }));
+        navigate(`/${role}/home`);
+      })
+      .catch((error) => {
+        const e = formattedErrorMessage(error);
+        toast.showError(e);
+        setSubmitting(false);
+      });
     setSubmitting(false);
   };
 
