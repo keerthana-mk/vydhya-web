@@ -4,37 +4,49 @@ import { Form, Formik } from "formik";
 import { InputField, PasswordField } from "../../formik";
 import * as Yup from "yup";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-// import { formattedErrorMessage } from "../../../utils/formattedErrorMessage";
 import { useAuth } from "../../../services/auth";
 import api from "../../../services/api";
+import { LOGIN } from "../../../constants/apiRoutes";
+import useCustomToastr from "../../../utils/useCustomToastr";
+import { formattedErrorMessage } from "../../../utils/formattedErrorMessage";
+import { LOGIN_STUB } from "../../../constants/APIRESPONSES";
 
 const Login = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const toast = useCustomToastr();
 
   const loginFormSchema = Yup.object().shape({
-    email: Yup.string().min(2, "Too Short!").required("Required"),
-    password: Yup.string().min(2, "Too Short!").required("Required"),
+    user_id: Yup.string().min(2, "Too Short!").required("Required"),
+    user_password: Yup.string().min(2, "Too Short!").required("Required"),
   });
 
   const initialValues = {
-    email: "",
-    password: "",
+    user_id: "",
+    user_password: "",
   };
 
   const onSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
-    api
-      .post("/auth/login", values)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    const role = "insurer";
-    localStorage.setItem("auth", JSON.stringify({ user: { name: `${role} name`, role, id: 1 }, token: "12345" }));
-    // navigate(`/${role}/home`);
+    if (!LOGIN_STUB[values.user_id]) {
+      setSubmitting(false);
+      return toast.showError({ description: "Invalid credentials" });
+    }
+    const { role, username, token } = LOGIN_STUB[values.user_id];
+    // api
+    //   .post(LOGIN, values)
+    //   .then((response) => {
+    //     const { token, userId, username, role } = response.data;
+    //     localStorage.setItem("auth", JSON.stringify({ user: { userId, role, username }, token }));
+    //     navigate(`/${role}/home`);
+    //   })
+    //   .catch((error) => {
+    //     const e = formattedErrorMessage(error);
+    //     toast.showError(e);
+    //     setSubmitting(false);
+    //   });
+    localStorage.setItem("auth", JSON.stringify({ user: { username, role }, token }));
+    navigate(`/${role}/home`);
     setSubmitting(false);
   };
 
@@ -66,8 +78,8 @@ const Login = () => {
             {(props) => (
               <Form autoComplete="off">
                 <Stack mx="3" spacing={5}>
-                  <InputField isInline={false} direction="column" label="Email" name="email" isRequired />
-                  <PasswordField isInline={false} direction="column" label="Password" name="password" isRequired />
+                  <InputField isInline={false} direction="column" label="Email" name="user_id" isRequired />
+                  <PasswordField isInline={false} direction="column" label="Password" name="user_password" isRequired />
                   {/* submit button */}
                   <Button colorScheme="green" type="submit" isLoading={props.isSubmitting}>
                     Login

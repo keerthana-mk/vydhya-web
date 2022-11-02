@@ -1,5 +1,6 @@
 import React from "react";
 import { AiFillHome } from "react-icons/ai";
+import { HiOutlineClipboardList } from "react-icons/hi";
 
 const insurerPrimaryMenu = [
   {
@@ -9,8 +10,8 @@ const insurerPrimaryMenu = [
   },
   {
     name: "View Plans",
-    link: "/insurer/insurances",
-    // icon: <AiFillHome color="white" />,
+    link: "/insurer/plans",
+    icon: <HiOutlineClipboardList color="white" />,
   },
 ];
 

@@ -1,4 +1,4 @@
-import { Box, Button, Center, CheckboxIcon, Image, List, ListIcon, ListItem, Stack, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Button, Center, CheckboxIcon, List, ListIcon, ListItem, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 
 const InsurerCard = () => {

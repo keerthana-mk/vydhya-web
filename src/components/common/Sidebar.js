@@ -1,18 +1,20 @@
 import React from "react";
 import { Box, Divider, Flex } from "@chakra-ui/react";
-import adminMenu from "../../constants/adminMenu";
+import patientMenu from "../../constants/patientMenu";
 import insurerMenu from "../../constants/insurerMenu";
+import doctorMenu from "../../constants/doctorMenu";
 import { Link } from "react-router-dom";
 import { useAuth, useLogout } from "../../services/auth";
 import { BiLogOut } from "react-icons/bi";
 
-function Sidebar() {
+function Sidebar(props) {
+  const { isExpanded } = props;
   const logout = useLogout();
   const { user } = useAuth();
-  console.log("🚀 -> file: Sidebar.js -> line 12 -> user", user)
 
   const menuSelector = {
-    customer: adminMenu,
+    patient: patientMenu,
+    doctor: doctorMenu,
     insurer: insurerMenu,
   };
 
@@ -25,8 +27,9 @@ function Sidebar() {
 
   const Entry = ({ onClick, children, link }) => (
     <Box
-      p={3}
-      my={2}
+      py={3}
+      px={isExpanded ? 3 : 2}
+      my={1}
       fontSize={15}
       textAlign="center"
       backgroundColor={isActive(link) ? "secondary" : "transparent"}
@@ -36,7 +39,7 @@ function Sidebar() {
       borderRadius={4}
       onClick={() => onClick && onClick()}
     >
-      <Flex align="center" gap={2}>
+      <Flex align="center" gap={2} justifyContent={!isExpanded && "center"}>
         {children}
       </Flex>
     </Box>
@@ -49,16 +52,16 @@ function Sidebar() {
           <Link to={m.link}>
             <Entry link={m.link}>
               {m.icon}
-              {m.name}
+              {isExpanded && m.name}
             </Entry>
           </Link>
         </React.Fragment>
       ))}
-      <Box position="absolute" bottom="0" w="9%">
+      <Box position="absolute" bottom="0" w={isExpanded ? "9%" : "2%"}>
         <Divider />
         <Entry onClick={() => logout()}>
           <BiLogOut />
-          Logout
+          {isExpanded && "Logout"}
         </Entry>
       </Box>
     </>
