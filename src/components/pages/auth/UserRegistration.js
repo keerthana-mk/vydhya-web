@@ -37,7 +37,7 @@ const UserRegistration = () => {
   const onSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
     api
-      .post(REGISTER, values)
+      .post(REGISTER, { ...values, is_first_login: true })
       .then((response) => {
         toast.showSuccess("Registration Successful!");
         navigate("/login");
