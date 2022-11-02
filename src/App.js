@@ -10,15 +10,22 @@ import customTheme from "./styles/theme";
 //Other Imports
 import { ChakraProvider } from "@chakra-ui/react";
 import { Routes, Route } from "react-router-dom";
-import { Login } from "./components/pages/auth";
+import { Login, UserRegistration, ResetCredentials } from "./components/pages/auth";
 import { Lost } from "./components/pages";
-import { ResponseInterceptor } from "./components/utils/ResponseInterceptor";
 import { useAuth } from "./services/auth";
-import api from "./services/api";
-import WithAdmin from "./hocs/WithAdmin";
-import Main from "./components/pages/home/Main";
+import { ResponseInterceptor } from "./utils/ResponseInterceptor";
 import Landing from "./components/pages/landingpage/Landing";
-import UserRegistration from "./components/pages/auth/UserRegistration";
+import api from "./services/api";
+
+// HOCs
+import WithPatient from "./hocs/WithPatient";
+import WithInsurer from "./hocs/WithInsurer";
+import WithDoctor from "./hocs/WithDoctor";
+
+// Patient Pages
+import { Profile, ViewDoctors, Main, ManagePlans } from "./components/pages/patient";
+import InsurerMain from "./components/pages/insurer/InsurerMain";
+import ViewPlans from "./components/pages/insurer/ViewPlans";
 
 const App = () => {
   const { token } = useAuth();
@@ -31,8 +38,23 @@ const App = () => {
         <Route path="/" element={<Landing />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<UserRegistration />} />
-        <Route path="admin" element={<WithAdmin />}>
+        <Route path="reset-credentials" element={<ResetCredentials />} />
+        <Route path="patient" element={<WithPatient />}>
           <Route path="home" element={<Main />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="find-doctors" element={<ViewDoctors />} />
+          <Route path="plans" element={<ManagePlans />} />
+        </Route>
+        <Route path="doctor" element={<WithDoctor />}>
+          <Route path="home" element={<InsurerMain />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="manage-schedule" element={<Profile />} />
+          <Route path="patient-history" element={<Profile />} />
+          <Route path="appointment-history" element={<Profile />} />
+        </Route>
+        <Route path="insurer" element={<WithInsurer />}>
+          <Route path="home" element={<InsurerMain />} />
+          <Route path="plans" element={<ViewPlans />} />
         </Route>
         <Route path="*" element={<Lost />} />
       </Routes>

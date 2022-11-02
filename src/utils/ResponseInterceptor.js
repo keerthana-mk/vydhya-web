@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { useLogout } from "../../services/auth";
+import { useLogout } from "../services/auth";
 import axios from "axios";
-import useCustomToastr from "../../utils/useCustomToastr";
+import useCustomToastr from "./useCustomToastr";
 
 export const ResponseInterceptor = () => {
   const logout = useLogout();
