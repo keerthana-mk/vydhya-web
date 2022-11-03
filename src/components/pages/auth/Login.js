@@ -9,7 +9,6 @@ import api from "../../../services/api";
 import { LOGIN } from "../../../constants/apiRoutes";
 import useCustomToastr from "../../../utils/useCustomToastr";
 import { formattedErrorMessage } from "../../../utils/formattedErrorMessage";
-import { LOGIN_STUB } from "../../../constants/APIRESPONSES";
 
 const Login = () => {
   const navigate = useNavigate();
