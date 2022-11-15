@@ -8,7 +8,7 @@ const InsurerMain = () => {
   return (
     <Layout>
       <Stack>
-        <Heading>{`Welcome ${user.name}`}</Heading>
+        <Heading>{`Welcome ${user.user_name}`}</Heading>
         <Container py={5} maxW={"container.lg"}>
           <Heading as={"h4"}>Upcoming Claims</Heading>
           <Grid

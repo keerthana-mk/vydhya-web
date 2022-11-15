@@ -30,20 +30,20 @@ const Login = () => {
     api
       .post(LOGIN, values)
       .then((response) => {
-        const { token, userId, username, role } = response.data;
-        localStorage.setItem("auth", JSON.stringify({ user: { userId, role, username }, token }));
-        navigate(`/${role}/home`);
+        setSubmitting(false);
+        const { token = "122334", user_id, user_name, user_role } = response.data;
+        localStorage.setItem("auth", JSON.stringify({ user: { user_id, user_role, user_name }, token }));
+        navigate(`/${user_role}/home`);
       })
       .catch((error) => {
         const e = formattedErrorMessage(error);
         toast.showError(e);
         setSubmitting(false);
       });
-    setSubmitting(false);
   };
 
-  return user?.role ? (
-    <Navigate to={`/${user.role}/home`} replace />
+  return user?.user_role ? (
+    <Navigate to={`/${user.user_role}/home`} replace />
   ) : (
     <Flex bg="white" pos="fixed" top="0" left="0" right="0" bottom="0" zIndex={2}>
       <Link to="/">

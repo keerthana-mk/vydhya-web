@@ -7,8 +7,8 @@ const Landing = () => {
   const [isLargerThanLG] = useMediaQuery("(min-width: 62em)");
   const { user } = useAuth();
 
-  return user?.role ? (
-    <Navigate to={`/${user.role}/home`} replace />
+  return user?.user_role ? (
+    <Navigate to={`/${user?.user_role}/home`} replace />
   ) : (
     <Flex>
       <Box>

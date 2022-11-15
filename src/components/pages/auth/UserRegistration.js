@@ -16,7 +16,6 @@ const UserRegistration = () => {
   const toast = useCustomToastr();
 
   const registrationFormSchema = Yup.object().shape({
-    user_id: Yup.string().min(2, "Too Short!").required("Required"),
     user_email: Yup.string().min(2, "Too Short!").required("Required"),
     user_password: Yup.string().min(2, "Too Short!").required("Required"),
     first_name: Yup.string().min(2, "Too Short!").required("Required"),
@@ -26,7 +25,6 @@ const UserRegistration = () => {
 
   // Initial Values Displayed in Registration Form
   const initialValues = {
-    user_id: "",
     user_email: "",
     user_password: "",
     first_name: "",
@@ -37,8 +35,9 @@ const UserRegistration = () => {
   const onSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
     api
-      .post(REGISTER, { ...values, is_first_login: true })
+      .post(REGISTER, { ...values, user_id: "test", is_first_login: "yes" })
       .then((response) => {
+        setSubmitting(false);
         toast.showSuccess("Registration Successful!");
         navigate("/login");
       })
@@ -47,11 +46,10 @@ const UserRegistration = () => {
         toast.showError(e);
         setSubmitting(false);
       });
-    setSubmitting(false);
   };
 
-  return user?.role ? (
-    <Navigate to={`/${user.role}/home`} replace />
+  return user?.user_role ? (
+    <Navigate to={`/${user?.user_role}/home`} replace />
   ) : (
     <Flex bg="white" pos="fixed" top="0" left="0" right="0" bottom="0" zIndex={2}>
       <Link to="/">
@@ -78,7 +76,6 @@ const UserRegistration = () => {
             {(props) => (
               <Form autoComplete="off">
                 <Stack mx="3" spacing={5}>
-                  <InputField isInline={false} direction="column" name="user_id" label="User ID" placeholder="Enter User ID" />
                   <InputField isInline={false} direction="column" label="Email" name="user_email" isRequired />
                   <PasswordField isInline={false} direction="column" label="Password" name="user_password" isRequired />
                   <InputField isInline={false} direction="column" name="first_name" label="First Name" placeholder="Enter First Name" />
@@ -90,7 +87,7 @@ const UserRegistration = () => {
                     options={[
                       { value: "patient", label: "Patient" },
                       { value: "doctor", label: "Doctor" },
-                      { value: "admin", label: "Admin" },
+                      { value: "insurer", label: "Insurer" },
                     ]}
                   />
                   {/* submit button */}

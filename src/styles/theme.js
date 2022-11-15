@@ -37,9 +37,9 @@ const overrides = {
     "6xl": "64px",
   },
   colors: {
-    primary: "#4C2B36",
-    secondary: "#9bbec7",
-    tertiary: "#C6C7C8",
+    primary: "#01061A",
+    secondary: "#1396A8",
+    tertiary: "#FFF",
   },
 };
 
