@@ -18,7 +18,7 @@ function Sidebar(props) {
     insurer: insurerMenu,
   };
 
-  const menu = menuSelector[user?.role];
+  const menu = menuSelector[user?.user_role];
 
   const isActive = (link) => {
     const currentPath = window.location.pathname;

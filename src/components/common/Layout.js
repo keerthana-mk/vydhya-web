@@ -30,9 +30,9 @@ const Layout = ({ children }) => {
       </Box>
       <Box display="block" bg="tertiary" w={isExpanded ? ["100%", "100%", "90%", "90%"] : ["100%", "100%", "97%", "97%"]} p="4">
         <Flex justify="flex-end" align="center" mb="4">
-          <Text>{user?.username || "Guest"}</Text>
+          <Text>{user?.user_name || "Guest"}</Text>
           <Box w="0.1em" h="1em" mx="0.7em" background="primary" />
-          <Text>{user?.role || "User"}</Text>
+          <Text>{user?.user_role || "User"}</Text>
         </Flex>
         {children}
       </Box>

@@ -26,6 +26,7 @@ import WithDoctor from "./hocs/WithDoctor";
 import { Profile, ViewDoctors, Main, ManagePlans } from "./components/pages/patient";
 import InsurerMain from "./components/pages/insurer/InsurerMain";
 import ViewPlans from "./components/pages/insurer/ViewPlans";
+import { DoctorHome } from "./components/pages/doctor";
 
 const App = () => {
   const { token } = useAuth();
@@ -46,7 +47,7 @@ const App = () => {
           <Route path="plans" element={<ManagePlans />} />
         </Route>
         <Route path="doctor" element={<WithDoctor />}>
-          <Route path="home" element={<InsurerMain />} />
+          <Route path="home" element={<DoctorHome />} />
           <Route path="profile" element={<Profile />} />
           <Route path="manage-schedule" element={<Profile />} />
           <Route path="patient-history" element={<Profile />} />
@@ -54,6 +55,7 @@ const App = () => {
         </Route>
         <Route path="insurer" element={<WithInsurer />}>
           <Route path="home" element={<InsurerMain />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="plans" element={<ViewPlans />} />
         </Route>
         <Route path="*" element={<Lost />} />

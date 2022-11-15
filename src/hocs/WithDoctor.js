@@ -6,7 +6,7 @@ import api from "../services/api";
 function WithDoctor() {
   const { user = null, token } = useAuth();
   api.setHeader(token);
-  return user && user.role === "doctor" ? <Outlet /> : redirectToLogin();
+  return user && user?.user_role === "doctor" ? <Outlet /> : redirectToLogin();
 }
 
 export default WithDoctor;
