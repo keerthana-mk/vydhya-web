@@ -48,7 +48,7 @@ const Login = () => {
     <Flex pos="fixed" top="0" left="0" right="0" bottom="0" zIndex={2}>
       <Link to="/">
         <Text fontSize="xl" fontWeight="bold" cursor="pointer" p="6">
-          YDHYA
+          VYDHYA
         </Text>
       </Link>
       <Flex

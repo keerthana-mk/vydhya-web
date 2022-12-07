@@ -15,7 +15,7 @@ const Landing = () => {
         <Flex h="10vh" alignItems="center" p="6" position="sticky" top="0" zIndex="sticky" w="full">
           <Link to="/">
             <Text fontSize="xl" fontWeight="bold" cursor="pointer">
-              YDHYA
+              VYDHYA
             </Text>
           </Link>
           <Spacer />
@@ -36,7 +36,7 @@ const Landing = () => {
         >
           <Box mr={isLargerThanLG ? "6" : "0"} w={isLargerThanLG ? "60%" : "full"}>
             <Text fontSize={isLargerThanLG ? "5xl" : "4xl"} fontWeight="bold" mb="4">
-              YDHYA - Building a bridge between your well-being and you.
+              VYDHYA - Building a bridge between your well-being and you.
             </Text>
             <Text mb="6" fontSize={isLargerThanLG ? "lg" : "base"} opacity={0.7}>
               To provide everyone, everywhere with accessible healthcare and affordable insurance.

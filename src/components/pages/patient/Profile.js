@@ -186,20 +186,6 @@ const Profile = () => {
           >
             {(props) => (
               <Form autoComplete="off">
-                <Stack isInline align="center">
-                  {profilePic && (
-                    <Stack isInline align="center">
-                      <Text fontWeight={600} color={"gray.500"}>
-                        Profile Picture
-                      </Text>
-                      <img height="300px" width="300px" src={"data:image/jpg;base64," + profilePic} />
-                      <Button size="sm" onClick={() => setProfilePic("")} colorScheme="red">
-                        <BsTrashFill />
-                      </Button>
-                    </Stack>
-                  )}
-                  <FileUploader />
-                </Stack>
                 <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)"]} gap={6} mb="5">
                   <InputField isInline={false} direction="column" label="User ID" name="user_id" />
                   <MultiTextField
@@ -362,6 +348,20 @@ const Profile = () => {
         <CustomSpinner />
       ) : (
         <Stack>
+          <Stack isInline align="center">
+            {profilePic && (
+              <Stack isInline align="center">
+                <Text fontWeight={600} color={"gray.500"}>
+                  Profile Picture
+                </Text>
+                <img height="300px" width="300px" src={"data:image/jpg;base64," + profilePic} />
+                <Button size="sm" onClick={() => setProfilePic("")} colorScheme="red">
+                  <BsTrashFill />
+                </Button>
+              </Stack>
+            )}
+            <FileUploader />
+          </Stack>
           <RenderProfile />
         </Stack>
       )}
