@@ -21,7 +21,7 @@ const InsurerMain = () => {
             mt={5}
           >
             <GridItem w="100%">
-              <Flex flexDirection={"column"} background="white" p="10" borderRadius={10}>
+              <Flex flexDirection={"column"} p="10" borderRadius={10}>
                 <Text fontSize={"4xl"} fontWeight={"bold"}>
                   Claim 1
                 </Text>
@@ -30,7 +30,7 @@ const InsurerMain = () => {
               </Flex>
             </GridItem>
             <GridItem w="100%">
-            <Flex flexDirection={"column"} background="white" p="10" borderRadius={10}>
+              <Flex flexDirection={"column"} p="10" borderRadius={10}>
                 <Text fontSize={"4xl"} fontWeight={"bold"}>
                   Claim 2
                 </Text>

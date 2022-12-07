@@ -77,7 +77,7 @@ const ViewPlans = () => {
         ) : (
           <>
             <Flex p={6}>
-              <Input placeholder="Search plans" background={"white"} />
+              <Input placeholder="Search plans" />
             </Flex>
             <Grid templateColumns="repeat(3, 1fr)" gap={6}>
               {plans.map((p, i) => (

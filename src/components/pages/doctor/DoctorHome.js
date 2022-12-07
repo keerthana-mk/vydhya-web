@@ -13,7 +13,7 @@ const DoctorHome = () => {
       <Stack>
         <Heading>{`Welcome ${user.user_name}`}</Heading>
         <Stack isInline py={5} gap="4">
-          <Stack background="white" p="4" border="1px" borderColor="gray.300" borderRadius="5px">
+          <Stack p="4" border="1px" borderColor="gray.300" borderRadius="5px">
             <Heading as={"h4"}>Upcoming Appointments</Heading>
             <Grid
               templateColumns={{
@@ -25,7 +25,7 @@ const DoctorHome = () => {
               m="4"
             >
               <GridItem w="100%">
-                <Flex flexDirection="column" background="white" border="1px" borderColor="gray.300" borderRadius="5px" p="4">
+                <Flex flexDirection="column" border="1px" borderColor="gray.300" borderRadius="5px" p="4">
                   <Text fontSize={"3xl"} fontWeight={"bold"}>
                     Appointment 1
                   </Text>
@@ -33,7 +33,7 @@ const DoctorHome = () => {
                 </Flex>
               </GridItem>
               <GridItem w="100%">
-                <Flex flexDirection="column" background="white" border="1px" borderColor="gray.300" borderRadius="5px" p="4">
+                <Flex flexDirection="column" border="1px" borderColor="gray.300" borderRadius="5px" p="4">
                   <Text fontSize={"3xl"} fontWeight={"bold"}>
                     Appointment 2
                   </Text>

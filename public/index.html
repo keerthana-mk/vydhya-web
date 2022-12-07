@@ -5,10 +5,7 @@
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web app"
-    />
+    <meta name="description" content="Web app" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -39,5 +36,37 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+      var Tawk_API = Tawk_API || {},
+        Tawk_LoadStart = new Date();
+      (function () {
+        var s1 = document.createElement("script"),
+          s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = "https://embed.tawk.to/638d4801b0d6371309d29aca/1gjfu2hgf";
+        s1.charset = "UTF-8";
+        s1.setAttribute("crossorigin", "*");
+        s0.parentNode.insertBefore(s1, s0);
+      })();
+      var removeBranding = function () {
+        try {
+          var element = document.querySelector("iframe[title*=chat]:nth-child(2)").contentDocument.querySelector(`a[class*=tawk-branding]`);
+          var elementt = document
+            .querySelector("iframe[title*=chat]:nth-child(2)")
+            .contentDocument.querySelector(`a[class*=tawk-button-small]`);
+          if (element) {
+            element.remove();
+          }
+          if (elementt) {
+            elementt.remove();
+          }
+        } catch (e) {}
+      };
+      var tick = 100;
+      setInterval(removeBranding, tick);
+      setInterval(removeBranding, tick);
+    </script>
+    <!--End of Tawk.to Script-->
   </body>
 </html>

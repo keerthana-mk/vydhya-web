@@ -50,7 +50,6 @@ InputField.defaultProps = {
   direction: { xs: "column", md: "row" },
   showHeader: true,
   containerStyle: {},
-  backgroundColor: "white",
   color: "black",
 };
 

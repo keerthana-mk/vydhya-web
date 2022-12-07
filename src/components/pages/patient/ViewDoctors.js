@@ -75,7 +75,7 @@ const ViewDoctors = () => {
         {doctors.length > 0 ? (
           <Grid templateColumns="repeat(3, 1fr)" gap={6}>
             {doctors.map((x, i) => (
-              <Card key={i} />
+              <Card key={i} doctor={x} />
             ))}
           </Grid>
         ) : (

@@ -9,7 +9,7 @@ const ViewDoctors = () => {
       <Stack>
         <Heading>Doctors</Heading>
         <Flex p={6}>
-          <Input placeholder="Search doctors" background={"white"} />
+          <Input placeholder="Search doctors" />
         </Flex>
         <Grid templateColumns="repeat(3, 1fr)" gap={6}>
           {[...Array(10)].map((x, i) => (

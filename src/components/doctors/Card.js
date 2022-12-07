@@ -1,7 +1,8 @@
-import { Box, Button, Center, CheckboxIcon, Image, List, ListIcon, ListItem, Stack, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Button, Center, List, ListItem, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 
-const Card = () => {
+const Card = (props) => {
+  const { doctor } = props;
   return (
     <Center py={6}>
       <Box maxW={"330px"} w={"full"} bg={useColorModeValue("white", "gray.800")} boxShadow={"2xl"} rounded={"md"} overflow={"hidden"}>
@@ -15,35 +16,24 @@ const Card = () => {
             color={"green.500"}
             rounded={"full"}
           >
-            Name
+            {doctor.name || "-"}
           </Text>
-          <Image src="https://bit.ly/dan-abramov" alt="Dan Abramov" />
           <Stack direction={"row"} align={"center"} justify={"center"}>
-            <Text fontSize={"3xl"}>$</Text>
             <Text fontSize={"6xl"} fontWeight={800}>
-              79
+              {doctor.experience}
             </Text>
-            <Text color={"gray.500"}>/session</Text>
+            <Text color={"gray.500"}>years of experience</Text>
           </Stack>
         </Stack>
         <Box bg={useColorModeValue("gray.50", "gray.900")} p={6}>
           <List spacing={3}>
-            <ListItem>
-              <ListIcon as={CheckboxIcon} color="green.400" />
-              5.000 views
-            </ListItem>
-            <ListItem>
-              <ListIcon as={CheckboxIcon} color="green.400" />
-              Specialization 1, Specialization 2, Specialization 3, Specialization 4
-            </ListItem>
-            <ListItem>
-              <ListIcon as={CheckboxIcon} color="green.400" />
-              Location
-            </ListItem>
-            <ListItem>
-              <ListIcon as={CheckboxIcon} color="green.400" />
-              All features
-            </ListItem>
+            <ListItem>Email: {doctor.contact_email}</ListItem>
+            <ListItem>Phone: {doctor.contact_phone}</ListItem>
+            <ListItem>Gender: {doctor.gender}</ListItem>
+            <ListItem>Hospital Name: {doctor.hospital_name}</ListItem>
+            <ListItem>Hospital address: {doctor.hospital_address}</ListItem>
+            <ListItem>Specialty: {doctor.speciality}</ListItem>
+            <ListItem>Covid Supported: {doctor.is_hosp_covid_supported ? "Yes" : "No"}</ListItem>
           </List>
 
           <Button

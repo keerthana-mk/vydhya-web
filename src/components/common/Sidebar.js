@@ -25,7 +25,7 @@ function Sidebar(props) {
     return currentPath.includes(link);
   };
 
-  const Entry = ({ onClick, children, link }) => (
+  const Entry = ({ onClick, children, link, name }) => (
     <Box
       py={3}
       px={isExpanded ? 3 : 2}
@@ -38,6 +38,7 @@ function Sidebar(props) {
       _hover={{ bg: "secondary" }}
       borderRadius={4}
       onClick={() => onClick && onClick()}
+      title={name}
     >
       <Flex align="center" gap={2} justifyContent={!isExpanded && "center"}>
         {children}
@@ -50,7 +51,7 @@ function Sidebar(props) {
       {menu.map((m) => (
         <React.Fragment key={m.link}>
           <Link to={m.link}>
-            <Entry link={m.link}>
+            <Entry link={m.link} name={m.name}>
               {m.icon}
               {isExpanded && m.name}
             </Entry>
@@ -59,7 +60,7 @@ function Sidebar(props) {
       ))}
       <Box position="absolute" bottom="0" w={isExpanded ? "9%" : "2%"}>
         <Divider />
-        <Entry onClick={() => logout()}>
+        <Entry onClick={() => logout()} name={"Logout"}>
           <BiLogOut />
           {isExpanded && "Logout"}
         </Entry>

@@ -1,7 +1,27 @@
 import { Box, Button, Center, CheckboxIcon, List, ListIcon, ListItem, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
+import { ENROLL_PLAN } from "../../constants/apiRoutes";
+import api from "../../services/api";
+import { formattedErrorMessage } from "../../utils/formattedErrorMessage";
+import useCustomToastr from "../../utils/useCustomToastr";
 
-const InsurerCard = () => {
+const InsurerCard = (props) => {
+  const toast = useCustomToastr();
+  const { plan, refresher } = props;
+
+  const handlePlanSelection = () => {
+    api
+      .post(ENROLL_PLAN + "?" + new URLSearchParams({ plan_id: plan.plan_id }))
+      .then((response) => {
+        toast.showSuccess("Plan selected successfully");
+        refresher();
+      })
+      .catch((error) => {
+        const e = formattedErrorMessage(error);
+        toast.showError(e);
+      });
+  };
+
   return (
     <Center py={6}>
       <Box maxW={"330px"} w={"full"} bg={useColorModeValue("white", "gray.800")} boxShadow={"2xl"} rounded={"md"} overflow={"hidden"}>
@@ -15,30 +35,25 @@ const InsurerCard = () => {
             color={"green.500"}
             rounded={"full"}
           >
-            Plan
+            {plan.plan_display_name || "-"}
           </Text>
           <Stack direction={"row"} align={"center"} justify={"center"}>
             <Text fontSize={"3xl"}>$</Text>
             <Text fontSize={"6xl"} fontWeight={800}>
-              79
+              {plan.premium}
             </Text>
             <Text color={"gray.500"}>/month</Text>
           </Stack>
         </Stack>
         <Box bg={useColorModeValue("gray.50", "gray.900")} p={6}>
           <List spacing={3}>
-            <ListItem>
-              <ListIcon as={CheckboxIcon} color="green.400" />
-              5.000 views
-            </ListItem>
-            <ListItem>
-              <ListIcon as={CheckboxIcon} color="green.400" />
-              Location
-            </ListItem>
-            <ListItem>
-              <ListIcon as={CheckboxIcon} color="green.400" />
-              All features
-            </ListItem>
+            <ListItem>Plan ID: {plan.plan_id}</ListItem>
+            <ListItem>Description: {plan.plan_description}</ListItem>
+            <ListItem>Coverage: ${plan.coverage}</ListItem>
+            <ListItem>Deductible: ${plan.deductible_amt}</ListItem>
+            <ListItem>Duration: {plan.duration_years} years</ListItem>
+            <ListItem>Insured By: {plan.insurer_id}</ListItem>
+            <ListItem>Exceptions: {plan.plan_exceptions.join(", ")}</ListItem>
           </List>
 
           <Button
@@ -54,6 +69,7 @@ const InsurerCard = () => {
             _focus={{
               bg: "green.500",
             }}
+            onClick={() => handlePlanSelection()}
           >
             Select Plan
           </Button>

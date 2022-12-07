@@ -60,11 +60,20 @@ const ResetCredentials = () => {
       return toast.showError({ description: "Please enter the same password!" });
     }
     api
-      .post(RESET_PASSWORD, {
-        user_password: values.user_password,
-        reset_code: values.reset_code,
-        ...resetDetails,
-      })
+      .post(
+        RESET_PASSWORD +
+          "?" +
+          new URLSearchParams(
+            {
+              ...resetDetails,
+            },
+            {
+              user_password: values.user_password,
+              reset_code: values.reset_code,
+              updated_at: new Date(),
+            }
+          )
+      )
       .then((response) => {
         toast.showSuccess("Reset successfully!");
         setIsReset(true);
@@ -80,7 +89,7 @@ const ResetCredentials = () => {
   return user?.user_role ? (
     <Navigate to={`/${user?.user_role}/home`} replace />
   ) : (
-    <Flex bg="white" pos="fixed" top="0" left="0" right="0" bottom="0" zIndex={2}>
+    <Flex pos="fixed" top="0" left="0" right="0" bottom="0" zIndex={2}>
       <Link to="/">
         <Text fontSize="xl" fontWeight="bold" cursor="pointer" p="6">
           YDHYA

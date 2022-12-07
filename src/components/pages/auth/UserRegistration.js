@@ -51,7 +51,7 @@ const UserRegistration = () => {
   return user?.user_role ? (
     <Navigate to={`/${user?.user_role}/home`} replace />
   ) : (
-    <Flex bg="white" pos="fixed" top="0" left="0" right="0" bottom="0" zIndex={2}>
+    <Flex pos="fixed" top="0" left="0" right="0" bottom="0" zIndex={2}>
       <Link to="/">
         <Text fontSize="xl" fontWeight="bold" cursor="pointer" p="6">
           YDHYA

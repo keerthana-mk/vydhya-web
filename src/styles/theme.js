@@ -9,6 +9,11 @@ const fonts = {
   Helvetica Neue, sans-serif;`,
 };
 
+const config = {
+  initialColorMode: "light",
+  useSystemColorMode: true,
+};
+
 const breakpoints = {
   sm: "40em",
   md: "52em",
@@ -17,6 +22,7 @@ const breakpoints = {
 
 const overrides = {
   ...chakraTheme,
+  config,
   fonts,
   breakpoints,
   fontWeights: {

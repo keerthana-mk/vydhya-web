@@ -38,7 +38,6 @@ function InputField(props) {
                 onChange={(value) => {
                   form.setFieldValue(props.name, value);
                 }}
-                backgroundColor="white"
               >
                 <NumberInputField type="number" {...props} />
                 {props.showStepper && (
