@@ -24,6 +24,11 @@ const patientPrimaryMenu = [
     link: "/patient/plans",
     icon: <HiOutlineClipboardList color="white" />,
   },
+  {
+    name: "COVID Questionnaire",
+    link: "/patient/questionnaire",
+    icon: <HiOutlineClipboardList color="white" />,
+  },
 ];
 
 export default patientPrimaryMenu;

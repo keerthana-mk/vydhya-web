@@ -1,4 +1,4 @@
-import { Button, Grid, Stack } from "@chakra-ui/react";
+import { Button, Grid, Stack, Text } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import React from "react";
 import Layout from "../../common/Layout";
@@ -6,16 +6,19 @@ import { InputField, MultiTextField, NumberField, SelectField } from "../../form
 import * as Yup from "yup";
 import { useAuth } from "../../../services/auth";
 import api from "../../../services/api";
-import { PROFILE } from "../../../constants/apiRoutes";
+import { FETCH_PROFILE_PIC, PROFILE } from "../../../constants/apiRoutes";
 import { formattedErrorMessage } from "../../../utils/formattedErrorMessage";
 import useCustomToastr from "../../../utils/useCustomToastr";
 import { CustomSpinner } from "../../common";
+import FileUploader from "../../common/FileUploader";
+import { BsTrashFill } from "react-icons/bs";
 
 const Profile = () => {
   const { user } = useAuth();
   const [userProfile, setUserProfile] = React.useState({});
   const toast = useCustomToastr();
   const [loading, setLoading] = React.useState(false);
+  const [profilePic, setProfilePic] = React.useState(null);
 
   const patientProfileFormSchema = Yup.object().shape({
     user_id: Yup.string(),
@@ -134,6 +137,19 @@ const Profile = () => {
       });
   };
 
+  const fetchProfilePic = () => {
+    api
+      .get(FETCH_PROFILE_PIC)
+      .then((response) => {
+        setProfilePic(response);
+      })
+      .catch((error) => {
+        const e = formattedErrorMessage(error);
+        toast.showError(e);
+        setProfilePic("");
+      });
+  };
+
   const onSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
     api
@@ -170,6 +186,20 @@ const Profile = () => {
           >
             {(props) => (
               <Form autoComplete="off">
+                <Stack isInline align="center">
+                  {profilePic && (
+                    <Stack isInline align="center">
+                      <Text fontWeight={600} color={"gray.500"}>
+                        Profile Picture
+                      </Text>
+                      <img height="300px" width="300px" src={"data:image/jpg;base64," + profilePic} />
+                      <Button size="sm" onClick={() => setProfilePic("")} colorScheme="red">
+                        <BsTrashFill />
+                      </Button>
+                    </Stack>
+                  )}
+                  <FileUploader />
+                </Stack>
                 <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)"]} gap={6} mb="5">
                   <InputField isInline={false} direction="column" label="User ID" name="user_id" />
                   <MultiTextField
@@ -323,6 +353,7 @@ const Profile = () => {
   React.useEffect(() => {
     setLoading(true);
     fetchProfile();
+    fetchProfilePic();
   }, []);
 
   return (

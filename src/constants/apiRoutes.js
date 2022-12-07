@@ -1,5 +1,8 @@
 // Common
 export const BASE_URL = "http://localhost:3000";
+export const UPLOAD = "/upload/profilepic";
+export const FETCH_PROFILE_PIC = "/profilepic";
+export const COVID_QUESTIONNAIRE = "/covid_questionnaire";
 
 // Auth
 export const LOGIN = "/login";

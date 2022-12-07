@@ -23,7 +23,7 @@ import WithInsurer from "./hocs/WithInsurer";
 import WithDoctor from "./hocs/WithDoctor";
 
 // Patient Pages
-import { Profile, ViewDoctors, Main, ManagePlans } from "./components/pages/patient";
+import { Profile, ViewDoctors, Main, ManagePlans, CovidQuestionnaire } from "./components/pages/patient";
 import InsurerMain from "./components/pages/insurer/InsurerMain";
 import ViewPlans from "./components/pages/insurer/ViewPlans";
 import { DoctorHome } from "./components/pages/doctor";
@@ -46,6 +46,7 @@ const App = () => {
           <Route path="profile" element={<Profile />} />
           <Route path="find-doctors" element={<ViewDoctors />} />
           <Route path="plans" element={<ManagePlans />} />
+          <Route path="questionnaire" element={<CovidQuestionnaire />} />
         </Route>
         <Route path="doctor" element={<WithDoctor />}>
           <Route path="home" element={<DoctorHome />} />
