@@ -21,7 +21,7 @@ function SelectField(props) {
             >
               <Stack isInline={props.isInline} width="100%" align="center">
                 {props.showHeader && (
-                  <FormLabel w={"100%"} htmlFor={props.name} mx="2" my="0">
+                  <FormLabel w={"100%"} htmlFor={props.name} fontSize={17} mx="2" color={props.color}>
                     {props.label}
                   </FormLabel>
                 )}
@@ -38,9 +38,14 @@ function SelectField(props) {
                       props.onChange && props.onChange(selectedOption);
                     }}
                     styles={{
+                      control: (provided) => ({
+                        ...provided,
+                        backgroundColor: props.backgroundColor,
+                      }),
                       menu: (provided) => ({
                         ...provided,
                         zIndex: 3,
+                        color: "black",
                       }),
                     }}
                   />

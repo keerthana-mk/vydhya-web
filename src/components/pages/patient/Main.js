@@ -10,19 +10,8 @@ const Main = () => {
     <Layout>
       <Stack>
         <Heading>{`Welcome ${user.user_name}`}</Heading>
-        <iframe
-          id="iframe1"
-          src="https://ourworldindata.org/grapher/total-cases-covid-19?tab=map"
-          width="100%"
-          height="600px"
-          loading="lazy"
-        ></iframe>
-        <iframe
-          src="https://ourworldindata.org/grapher/full-list-cumulative-total-tests-per-thousand"
-          width="100%"
-          height="600px"
-          loading="lazy"
-        ></iframe>
+        <iframe src="https://ourworldindata.org/grapher/full-list-cumulative-total-tests-per-thousand" width="100%" height="600px"></iframe>
+        <iframe id="iframe1" src="https://ourworldindata.org/grapher/total-cases-covid-19?tab=map" width="100%" height="600px"></iframe>
       </Stack>
     </Layout>
   );

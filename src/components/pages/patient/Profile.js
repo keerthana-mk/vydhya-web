@@ -360,7 +360,7 @@ const Profile = () => {
                 </Button>
               </Stack>
             )}
-            <FileUploader />
+            <FileUploader pageRefresher={fetchProfilePic} />
           </Stack>
           <RenderProfile />
         </Stack>

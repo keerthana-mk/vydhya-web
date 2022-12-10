@@ -36,6 +36,17 @@ function MultiText(props) {
                     form.setFieldValue(props.name, (selectedValues && selectedValues.map((el) => el.value)) || []);
                   }}
                   value={field.value.map((v) => ({ value: v, label: v }))}
+                  styles={{
+                    control: (provided) => ({
+                      ...provided,
+                      backgroundColor: props.backgroundColor,
+                    }),
+                    menu: (provided) => ({
+                      ...provided,
+                      zIndex: 3,
+                      color: "black",
+                    }),
+                  }}
                 />
               </Box>
             </Stack>

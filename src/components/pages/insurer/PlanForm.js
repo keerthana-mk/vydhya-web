@@ -4,13 +4,16 @@ import React from "react";
 import * as Yup from "yup";
 import { INSURER_PLANS, INSURER_PLAN_UPDATE } from "../../../constants/apiRoutes";
 import api from "../../../services/api";
+import { useAuth } from "../../../services/auth";
 import { formattedErrorMessage } from "../../../utils/formattedErrorMessage";
 import useCustomToastr from "../../../utils/useCustomToastr";
 import { CheckBoxField, InputField, MultiTextField, NumberField } from "../../formik";
 
 const PlanForm = (props) => {
   const toast = useCustomToastr();
-  const insurer_id = localStorage.getItem("insurer_id");
+  const {
+    user: { user_id: insurer_id = "" },
+  } = useAuth();
   const { plan } = props;
 
   const planSchema = Yup.object().shape({
@@ -43,7 +46,10 @@ const PlanForm = (props) => {
     setSubmitting(true);
     let apiCall = api.post(INSURER_PLANS + "?" + new URLSearchParams({ insurer_id }), { insurer_id, ...values });
     if (plan)
-      apiCall = api.post(INSURER_PLAN_UPDATE + "?" + new URLSearchParams({ insurer_id, plan_name: plan.plan_name }), { insurer_id, ...values });
+      apiCall = api.post(INSURER_PLAN_UPDATE + "?" + new URLSearchParams({ insurer_id, plan_name: plan.plan_name }), {
+        insurer_id,
+        ...values,
+      });
     apiCall
       .then((response) => {
         toast.showSuccess("Success!");

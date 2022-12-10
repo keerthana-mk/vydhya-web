@@ -46,7 +46,7 @@ const Card = (props) => {
   });
 
   const initialValues = {
-    appointment_id: Math.floor(100000 + Math.random() * 900000),
+    appointment_id: Math.floor(10000000 + Math.random() * 90000000),
     doctor_id: doctor.contact_email,
     appointment_start_time: new Date(),
     duration: "30",

@@ -3,7 +3,6 @@ import {
   Flex,
   Grid,
   Heading,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -76,9 +75,6 @@ const ViewPlans = () => {
           <CustomSpinner />
         ) : (
           <>
-            <Flex p={6}>
-              <Input placeholder="Search plans" />
-            </Flex>
             <Grid templateColumns="repeat(3, 1fr)" gap={6}>
               {plans.map((p, i) => (
                 <InsurerCard key={i} plan={p} fetchPlans={fetchPlans} />

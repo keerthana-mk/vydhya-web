@@ -17,7 +17,6 @@ import { Form, Formik } from "formik";
 import React from "react";
 import { APPOINTMENTS, APPOINTMENT_FEEDBACK } from "../../constants/apiRoutes";
 import api from "../../services/api";
-import { useAuth } from "../../services/auth";
 import { formattedErrorMessage } from "../../utils/formattedErrorMessage";
 import useCustomToastr from "../../utils/useCustomToastr";
 import CustomSpinner from "./CustomSpinner";
@@ -27,7 +26,6 @@ import { NumberField, TextAreaField } from "../formik";
 
 const ViewAppointments = () => {
   const toast = useCustomToastr();
-  const { user } = useAuth();
 
   const [appointments, setAppointments] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -131,6 +129,62 @@ const ViewAppointments = () => {
     );
   };
 
+  const PaymentModal = ({ appointment }) => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [isPaid, setIsPaid] = React.useState(false);
+    return (
+      <>
+        <Button colorScheme="teal" onClick={onOpen}>
+          Pay
+        </Button>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Bill</ModalHeader>
+            <ModalBody>
+              <Stack>
+                <Text fontSize="md" color="blue.500" mb="2">
+                  Appointment ID: {appointment.appointment_id}
+                </Text>
+                <Text fontSize="md" color="blue.500" mb="2">
+                  Total Amount: {appointment.duration}hrs * 100/hr = ${appointment.duration * 100}
+                </Text>
+                <Text fontSize="md" color="blue.500" mb="2">
+                  You Pay: ${Math.round(0.2 * appointment.duration * 100)}
+                </Text>
+                <Text fontSize="md" color="blue.500" mb="2">
+                  Insurance Pays: ${Math.round(0.8 * appointment.duration * 100)}
+                </Text>
+              </Stack>
+              {isPaid ? (
+                <Badge colorScheme="green">Payment Successful</Badge>
+              ) : (
+                <Button
+                  mt="4"
+                  w={"full"}
+                  bg={"green.400"}
+                  color={"white"}
+                  rounded={"xl"}
+                  boxShadow={"0 5px 20px 0px rgb(72 187 120 / 43%)"}
+                  _hover={{
+                    bg: "green.500",
+                  }}
+                  onClick={() => {
+                    setIsPaid(true);
+                    toast.showSuccess("Payment Successful");
+                    onClose();
+                  }}
+                >
+                  Pay
+                </Button>
+              )}
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      </>
+    );
+  };
+
   return (
     <Layout>
       <Heading>My Appointments</Heading>
@@ -169,6 +223,23 @@ const ViewAppointments = () => {
                   </Box>
                 </Stack>
                 <FeedbackModal appointment={appointment} />
+                {appointment.feedback && (
+                  <>
+                    <Stack isInline d="flex" alignItems="baseline">
+                      <h3>Feedback:</h3>
+                      <Box color="gray.500" fontSize="sm" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase" ml="2">
+                        {appointment.feedback || "Not added yet"}
+                      </Box>
+                    </Stack>
+                    <Stack isInline d="flex" alignItems="baseline">
+                      <h3>Rating:</h3>
+                      <Box color="gray.500" fontSize="sm" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase" ml="2">
+                        {appointment.rating}/5
+                      </Box>
+                    </Stack>
+                  </>
+                )}
+                <PaymentModal appointment={appointment} />
               </Box>
             </Box>
           ))}

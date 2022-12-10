@@ -32,6 +32,7 @@ function FileUploader(props) {
       .then((r) => {
         toast.showSuccess({ description: "File added successfully" });
         setIsUploading(false);
+        props.pageRefresher && props.pageRefresher();
         handleRemoveFile();
       })
       .catch(() => {
@@ -58,7 +59,7 @@ function FileUploader(props) {
       <Flex my="2em" justifyContent="center" alignItems="center">
         {uploadedFile.mimeType ? (
           <Box pos="relative" align="center" maxW="16em" justifySelf="center">
-            <Box pos="absolute" top="1" right="1" m="1" rounded="lg" background="red.500" color="white">
+            <Box pos="absolute" top="1" right="1" m="1" rounded="lg" background="red.500">
               <CloseButton onClick={() => handleRemoveFile()} />
             </Box>
             {uploadedFile.mimeType && <GrDocument size="12em" />}
@@ -85,7 +86,6 @@ function FileUploader(props) {
                 borderRadius="md"
                 borderColor="blue.300"
                 borderStyle="dashed"
-                bg="white"
                 height="10em"
                 cursor="pointer"
                 maxW="16em"
