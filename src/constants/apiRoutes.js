@@ -1,5 +1,4 @@
 // Common
-export const BASE_URL = "http://localhost:3000";
 export const UPLOAD = "/upload/profilepic";
 export const FETCH_PROFILE_PIC = "/profilepic";
 export const COVID_QUESTIONNAIRE = "/covid_questionnaire";
@@ -23,3 +22,8 @@ export const SEARCH_DOCTOR = "/doctor/search";
 
 // Plan
 export const ENROLL_PLAN = "/enroll_health_plan";
+
+// Appointments
+export const APPOINTMENTS = "/get_appointments";
+export const NEW_APPOINTMENT = "/add_appointment";
+export const APPOINTMENT_FEEDBACK = "/update_feedback_by_appointment";

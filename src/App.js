@@ -27,7 +27,7 @@ import { Profile, ViewDoctors, Main, ManagePlans, CovidQuestionnaire } from "./c
 import InsurerMain from "./components/pages/insurer/InsurerMain";
 import ViewPlans from "./components/pages/insurer/ViewPlans";
 import { DoctorHome } from "./components/pages/doctor";
-import { Layout } from "./components/common";
+import { Layout, ViewAppointments } from "./components/common";
 
 const App = () => {
   const { token } = useAuth();
@@ -47,13 +47,14 @@ const App = () => {
           <Route path="find-doctors" element={<ViewDoctors />} />
           <Route path="plans" element={<ManagePlans />} />
           <Route path="questionnaire" element={<CovidQuestionnaire />} />
+          <Route path="appointments" element={<ViewAppointments />} />
         </Route>
         <Route path="doctor" element={<WithDoctor />}>
           <Route path="home" element={<DoctorHome />} />
           <Route path="profile" element={<Profile />} />
           <Route path="manage-schedule" element={<Layout />} />
           <Route path="patient-history" element={<Layout />} />
-          <Route path="appointment-history" element={<Layout />} />
+          <Route path="appointment-history" element={<ViewAppointments />} />
         </Route>
         <Route path="insurer" element={<WithInsurer />}>
           <Route path="home" element={<InsurerMain />} />
