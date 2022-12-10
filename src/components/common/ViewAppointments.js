@@ -23,9 +23,11 @@ import CustomSpinner from "./CustomSpinner";
 import Layout from "./Layout";
 import * as Yup from "yup";
 import { NumberField, TextAreaField } from "../formik";
+import { useAuth } from "../../services/auth";
 
 const ViewAppointments = () => {
   const toast = useCustomToastr();
+  const { user } = useAuth();
 
   const [appointments, setAppointments] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -192,57 +194,61 @@ const ViewAppointments = () => {
         <CustomSpinner />
       ) : (
         <Grid templateColumns="repeat(3, 1fr)" gap={6} mt="4">
-          {appointments.map((appointment) => (
-            <Box key={appointment.id} maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-              <Box m="3">
-                <Badge colorScheme={appointment.appointment_attended ? "green" : "red"}>
-                  {appointment.appointment_attended ? "Attended" : "Not Attended Yet"}
-                </Badge>
-                <Stack isInline d="flex" alignItems="baseline">
-                  <h3>Starts At:</h3>
-                  <Box color="gray.500" fontSize="sm" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase" ml="2">
-                    {appointment.appointment_start_time}
-                  </Box>
-                </Stack>
-                <Stack isInline d="flex" alignItems="baseline">
-                  <h3>Appointment ID:</h3>
-                  <Box color="gray.500" fontSize="sm" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase" ml="2">
-                    {appointment.appointment_id}
-                  </Box>
-                </Stack>
-                <Stack isInline d="flex" alignItems="baseline">
-                  <h3>Doctor ID:</h3>
-                  <Box color="gray.500" fontSize="sm" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase" ml="2">
-                    {appointment.doctor_id}
-                  </Box>
-                </Stack>
-                <Stack isInline d="flex" alignItems="baseline">
-                  <h3>Duration:</h3>
-                  <Box color="gray.500" fontSize="sm" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase" ml="2">
-                    {appointment.duration}
-                  </Box>
-                </Stack>
-                <FeedbackModal appointment={appointment} />
-                {appointment.feedback && (
-                  <>
-                    <Stack isInline d="flex" alignItems="baseline">
-                      <h3>Feedback:</h3>
-                      <Box color="gray.500" fontSize="sm" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase" ml="2">
-                        {appointment.feedback || "Not added yet"}
-                      </Box>
-                    </Stack>
-                    <Stack isInline d="flex" alignItems="baseline">
-                      <h3>Rating:</h3>
-                      <Box color="gray.500" fontSize="sm" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase" ml="2">
-                        {appointment.rating}/5
-                      </Box>
-                    </Stack>
-                  </>
-                )}
-                <PaymentModal appointment={appointment} />
+          {appointments.length <= 0 ? (
+            <Box>No appointments</Box>
+          ) : (
+            appointments.map((appointment) => (
+              <Box key={appointment.id} maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+                <Box m="3">
+                  <Badge colorScheme={appointment.appointment_attended ? "green" : "red"}>
+                    {appointment.appointment_attended ? "Attended" : "Not Attended Yet"}
+                  </Badge>
+                  <Stack isInline d="flex" alignItems="baseline">
+                    <h3>Starts At:</h3>
+                    <Box color="gray.500" fontSize="sm" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase" ml="2">
+                      {appointment.appointment_start_time}
+                    </Box>
+                  </Stack>
+                  <Stack isInline d="flex" alignItems="baseline">
+                    <h3>Appointment ID:</h3>
+                    <Box color="gray.500" fontSize="sm" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase" ml="2">
+                      {appointment.appointment_id}
+                    </Box>
+                  </Stack>
+                  <Stack isInline d="flex" alignItems="baseline">
+                    <h3>Doctor ID:</h3>
+                    <Box color="gray.500" fontSize="sm" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase" ml="2">
+                      {appointment.doctor_id}
+                    </Box>
+                  </Stack>
+                  <Stack isInline d="flex" alignItems="baseline">
+                    <h3>Duration:</h3>
+                    <Box color="gray.500" fontSize="sm" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase" ml="2">
+                      {appointment.duration}
+                    </Box>
+                  </Stack>
+                  <FeedbackModal appointment={appointment} />
+                  {appointment.feedback && user.user_role === "patient" && (
+                    <>
+                      <Stack isInline d="flex" alignItems="baseline">
+                        <h3>Feedback:</h3>
+                        <Box color="gray.500" fontSize="sm" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase" ml="2">
+                          {appointment.feedback || "Not added yet"}
+                        </Box>
+                      </Stack>
+                      <Stack isInline d="flex" alignItems="baseline">
+                        <h3>Rating:</h3>
+                        <Box color="gray.500" fontSize="sm" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase" ml="2">
+                          {appointment.rating}/5
+                        </Box>
+                      </Stack>
+                    </>
+                  )}
+                  {user.user_role === "patient" && <PaymentModal appointment={appointment} />}
+                </Box>
               </Box>
-            </Box>
-          ))}
+            ))
+          )}
         </Grid>
       )}
     </Layout>

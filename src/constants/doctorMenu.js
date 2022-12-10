@@ -19,7 +19,7 @@ const doctorPrimaryMenu = [
     icon: <BsFillCalendarWeekFill color="white" />,
   },
   {
-    name: "Appointment history",
+    name: "Appointments",
     link: "/doctor/appointment-history",
     icon: <BsClockHistory color="white" />,
   },

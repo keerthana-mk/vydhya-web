@@ -9,37 +9,8 @@ const InsurerMain = () => {
     <Layout>
       <Stack>
         <Heading>{`Welcome ${user.user_name}`}</Heading>
-        <Container py={5} maxW={"container.lg"}>
-          <Heading as={"h4"}>Upcoming Claims</Heading>
-          <Grid
-            templateColumns={{
-              base: "repeat(1, 1fr)",
-              sm: "repeat(2, 1fr)",
-              md: "repeat(4, 1fr)",
-            }}
-            gap={6}
-            mt={5}
-          >
-            <GridItem w="100%">
-              <Flex flexDirection={"column"} p="10" borderRadius={10}>
-                <Text fontSize={"4xl"} fontWeight={"bold"}>
-                  Claim 1
-                </Text>
-                <Box fontSize={"sm"}>$1000</Box>
-                <Box fontSize={"sm"}>Address and time</Box>
-              </Flex>
-            </GridItem>
-            <GridItem w="100%">
-              <Flex flexDirection={"column"} p="10" borderRadius={10}>
-                <Text fontSize={"4xl"} fontWeight={"bold"}>
-                  Claim 2
-                </Text>
-                <Box fontSize={"sm"}>$1000</Box>
-                <Box fontSize={"sm"}>Address and time</Box>
-              </Flex>
-            </GridItem>
-          </Grid>
-        </Container>
+        <iframe src="https://ourworldindata.org/grapher/full-list-cumulative-total-tests-per-thousand" width="100%" height="600px"></iframe>
+        <iframe id="iframe1" src="https://ourworldindata.org/grapher/total-cases-covid-19?tab=map" width="100%" height="600px"></iframe>
       </Stack>
     </Layout>
   );

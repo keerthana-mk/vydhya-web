@@ -27,3 +27,7 @@ export const ENROLL_PLAN = "/enroll_health_plan";
 export const APPOINTMENTS = "/get_appointments";
 export const NEW_APPOINTMENT = "/add_appointment";
 export const APPOINTMENT_FEEDBACK = "/update_feedback_by_appointment";
+
+// Schedules
+export const SCHEDULES = "/get_schedule";
+export const NEW_SCHEDULE = "/add_schedule";

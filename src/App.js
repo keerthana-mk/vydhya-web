@@ -28,6 +28,7 @@ import InsurerMain from "./components/pages/insurer/InsurerMain";
 import ViewPlans from "./components/pages/insurer/ViewPlans";
 import { DoctorHome } from "./components/pages/doctor";
 import { Layout, ViewAppointments } from "./components/common";
+import { ViewSchedules } from "./components/doctors";
 
 const App = () => {
   const { token } = useAuth();
@@ -52,8 +53,7 @@ const App = () => {
         <Route path="doctor" element={<WithDoctor />}>
           <Route path="home" element={<DoctorHome />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="manage-schedule" element={<Layout />} />
-          <Route path="patient-history" element={<Layout />} />
+          <Route path="manage-schedule" element={<ViewSchedules />} />
           <Route path="appointment-history" element={<ViewAppointments />} />
         </Route>
         <Route path="insurer" element={<WithInsurer />}>

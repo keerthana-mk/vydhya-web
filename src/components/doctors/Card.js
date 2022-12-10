@@ -62,7 +62,7 @@ const Card = (props) => {
         ...values,
         appointment_start_time: formattedTimestamp({
           timestamp: values.appointment_start_time.toISOString(),
-          timeformat: "yyyy-MM-dd hh:mm",
+          timeformat: "yyyy-MM-dd HH:mm",
         }),
       })
       .then((res) => {
