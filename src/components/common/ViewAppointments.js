@@ -47,8 +47,7 @@ const ViewAppointments = () => {
     api
       .get(APPOINTMENTS)
       .then((res) => {
-        const data = res.data?.message?.filter((appointment) => appointment[user.user_role + "_id"] === user.user_id);
-        setAppointments(data || []);
+        setAppointments(res.data?.message || []);
         setLoading(false);
       })
       .catch((err) => {
