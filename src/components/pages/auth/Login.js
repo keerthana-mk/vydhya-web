@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Flex, Text, Button, Stack } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { InputField, PasswordField } from "../../formik";
@@ -9,11 +9,13 @@ import api from "../../../services/api";
 import { LOGIN } from "../../../constants/apiRoutes";
 import useCustomToastr from "../../../utils/useCustomToastr";
 import { formattedErrorMessage } from "../../../utils/formattedErrorMessage";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Login = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const toast = useCustomToastr();
+  const [verified, setVerified] = useState(false);
 
   const loginFormSchema = Yup.object().shape({
     user_id: Yup.string().min(2, "Too Short!").required("Required"),
@@ -40,6 +42,10 @@ const Login = () => {
         toast.showError(e);
         setSubmitting(false);
       });
+  };
+
+  const onChange = (value) => {
+    if (value) setVerified(true);
   };
 
   return user?.user_role ? (
@@ -72,8 +78,9 @@ const Login = () => {
                 <Stack mx="3" spacing={5}>
                   <InputField isInline={false} direction="column" label="Email" name="user_id" isRequired />
                   <PasswordField isInline={false} direction="column" label="Password" name="user_password" isRequired />
+                  <ReCAPTCHA sitekey={process.env.REACT_APP_CAPTCHA_KEY} onChange={onChange} />
                   {/* submit button */}
-                  <Button colorScheme="green" type="submit" isLoading={props.isSubmitting}>
+                  <Button colorScheme="green" type="submit" disabled={!verified} isLoading={props.isSubmitting}>
                     Login
                   </Button>
                   <Link to="/reset-credentials">
