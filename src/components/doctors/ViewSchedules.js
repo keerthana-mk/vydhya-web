@@ -41,7 +41,7 @@ const ViewSchedules = () => {
       })
       .catch((err) => {
         const error = formattedErrorMessage(err);
-        toast.error(error);
+        toast.showError(error);
         setLoading(false);
       });
   };
