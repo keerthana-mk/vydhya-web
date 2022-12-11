@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../../services/auth";
 import { Form, Formik } from "formik";
 import { InputField, PasswordField, SelectField } from "../../formik";
@@ -9,11 +9,13 @@ import api from "../../../services/api";
 import { REGISTER } from "../../../constants/apiRoutes";
 import { formattedErrorMessage } from "../../../utils/formattedErrorMessage";
 import useCustomToastr from "../../../utils/useCustomToastr";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const UserRegistration = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const toast = useCustomToastr();
+  const [verified, setVerified] = useState(false);
 
   const registrationFormSchema = Yup.object().shape({
     user_email: Yup.string().min(2, "Too Short!").required("Required"),
@@ -46,6 +48,10 @@ const UserRegistration = () => {
         toast.showError(e);
         setSubmitting(false);
       });
+  };
+
+  const onChange = (value) => {
+    if (value) setVerified(true);
   };
 
   return user?.user_role ? (
@@ -90,8 +96,9 @@ const UserRegistration = () => {
                       { value: "insurer", label: "Insurer" },
                     ]}
                   />
+                  <ReCAPTCHA sitekey={process.env.REACT_APP_CAPTCHA_KEY} onChange={onChange} />
                   {/* submit button */}
-                  <Button colorScheme="green" type="submit" isLoading={props.isSubmitting}>
+                  <Button colorScheme="green" type="submit" disabled={!verified} isLoading={props.isSubmitting}>
                     Register
                   </Button>
                   <Link to="/login">
