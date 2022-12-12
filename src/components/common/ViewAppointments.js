@@ -2,6 +2,7 @@ import {
   Badge,
   Box,
   Button,
+  Divider,
   Grid,
   Heading,
   Modal,
@@ -67,7 +68,10 @@ const ViewAppointments = () => {
     const onSubmit = (values, { setSubmitting }) => {
       setSubmitting(true);
       api
-        .post(APPOINTMENT_FEEDBACK + "?" + new URLSearchParams({ appoinment_id: appointment.appointment_id }), values)
+        .post(APPOINTMENT_FEEDBACK + "?" + new URLSearchParams({ appoinment_id: appointment.appointment_id }), {
+          ...values,
+          appointment_attended: true,
+        })
         .then((res) => {
           toast.showSuccess("Feedback added successfully");
           setSubmitting(false);
@@ -85,7 +89,7 @@ const ViewAppointments = () => {
       <Badge colorScheme="green">Feedback added</Badge>
     ) : (
       <>
-        <Button colorScheme="teal" onClick={onOpen}>
+        <Button colorScheme="teal" onClick={onOpen} mr={2}>
           Add feedback
         </Button>
         <Modal isOpen={isOpen} onClose={onClose}>
@@ -242,6 +246,9 @@ const ViewAppointments = () => {
                           {appointment.rating}/5
                         </Box>
                       </Stack>
+                      <Box m="2">
+                        <Divider />
+                      </Box>
                     </>
                   )}
                   {user.user_role === "patient" && <PaymentModal appointment={appointment} />}

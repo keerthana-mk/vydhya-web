@@ -13,6 +13,7 @@ import api from "../../../services/api";
 const ResetCredentials = () => {
   const { user } = useAuth();
   const toast = useCustomToastr();
+  const navigate = useNavigate();
   const [isReset, setIsReset] = React.useState(false);
   const [resetDetails, setResetDetails] = React.useState({});
 
@@ -60,24 +61,16 @@ const ResetCredentials = () => {
       return toast.showError({ description: "Please enter the same password!" });
     }
     api
-      .post(
-        RESET_PASSWORD +
-          "?" +
-          new URLSearchParams(
-            {
-              ...resetDetails,
-            },
-            {
-              user_password: values.user_password,
-              reset_code: values.reset_code,
-              updated_at: new Date(),
-            }
-          )
-      )
+      .post(RESET_PASSWORD + "?" + new URLSearchParams(resetDetails), {
+        user_password: values.user_password,
+        reset_code: values.reset_code,
+        updated_at: new Date(),
+      })
       .then((response) => {
         toast.showSuccess("Reset successfully!");
         setIsReset(true);
         setSubmitting(false);
+        navigate("/login");
       })
       .catch((error) => {
         const e = formattedErrorMessage(error);
